@@ -25,9 +25,9 @@ void setup() {
   Serial.begin(115200);
 
   FastLED.addLeds<WS2812B, DATA, GRB>(leds, 0, NUM_LEDS);
-  FastLED.setMaxPowerInVoltsAndMilliamps(5, 500);
+  FastLED.setMaxPowerInVoltsAndMilliamps(5, 1500);
   FastLED.setCorrection( TypicalLEDStrip );
-  FastLED.setBrightness(128);
+//  FastLED.setBrightness(128);
 }
 
 
