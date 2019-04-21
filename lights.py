@@ -1,23 +1,28 @@
-from time import sleep
-import numpy as np
 import sys
-import serial.tools.list_ports
-import serial
+import numpy as np
+import colorsys
+from serial_library import write, write_channel
+from color_library import color_names
 
-# connect to the open serial port
-ports = list(serial.tools.list_ports.comports())
-ports = [p[0] for p in ports]
-if len(ports) == 0:
-    print("couldn't find any open ports")
-    exit()
-ser = serial.Serial(ports[0], 115200, timeout=0.5)
 
 NUM_LEDS = 226
+rgb = np.array([(255, 255, 255)]*NUM_LEDS)
 
-output = bytearray([0]+[255 for _ in range(NUM_LEDS)])
-ser.write(output)
-output = bytearray([1]+[255 for _ in range(NUM_LEDS)])
-ser.write(output)
-output = bytearray([2]+[255 for _ in range(NUM_LEDS)])
-ser.write(output)
+
+# read in the color arguments
+args = sys.argv[1:]
+if len(args) == 1:
+    color_name = args[0]
+    if color_name in color_names:
+        rgb[:] = color_names[color_name]
+    pass
+elif len(args) % 3 == 0:
+    a = np.array(list(map(int, args))).reshape(-1,3)
+    indexes = np.arange(NUM_LEDS)*a.shape[0]//NUM_LEDS
+    indexes = indexes.astype(int)
+    rgb = a[indexes,:]
+
+
+
+write(rgb)
 
