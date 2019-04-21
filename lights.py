@@ -41,7 +41,4 @@ else:
             # rainbow
             sec_per_cycle = fps*10  # number of seconds for each rainbow cycle
             rgb = np.array( [hsv2rgb((frame % sec_per_cycle)/(sec_per_cycle-1), 1, 1)]*NUM_LEDS )
-            print(rgb[:2,:])
-            print(rgb.shape)
             write(rgb.astype(int))
-            # exit()
