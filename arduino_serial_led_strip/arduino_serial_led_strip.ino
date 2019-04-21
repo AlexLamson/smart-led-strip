@@ -33,6 +33,11 @@ void setup() {
 
 void loop() {
   // READ IN NEW MESSAGES FROM SERIAL
+  if(Serial.available() > 227) {
+    while(Serial.available() > 227) {
+      Serial.read();
+    }
+  }
   if(Serial.available() == 227) {
     byte color_channel = Serial.read();
     for (int i = 0; i < 226 && Serial.available() > 0; i++) {

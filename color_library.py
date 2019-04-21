@@ -1,3 +1,5 @@
+import colorsys
+
 color_names = {
     'red': (255,0,0),
     'orange': (64,16,0),
@@ -16,3 +18,6 @@ color_names = {
     'white': (255,255,255),
     'black': (0,0,0),
 }
+
+def hsv2rgb(h,s,v):
+    return tuple(round(i * 255) for i in colorsys.hsv_to_rgb(h,s,v))
