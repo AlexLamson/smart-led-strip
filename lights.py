@@ -15,7 +15,7 @@ if len(args) == 1:
     color_name = args[0]
     if color_name in color_names:
         rgb[:] = color_names[color_name]
-    write(rgb)
+        write(rgb)
 
 elif len(args) > 0 and len(args) % 3 == 0:
     a = np.array(list(map(int, args))).reshape(-1,3)
